@@ -1,11 +1,11 @@
-#如何优化mysql中模糊查询 逻辑
+# 如何优化mysql中模糊查询 逻辑
 
-##前匹配:使用用 like 'prefix%' 的形式，这种情况Mysql可以正常利用索引
+## 前匹配:使用用 like 'prefix%' 的形式，这种情况Mysql可以正常利用索引
 ```sql
 select * from users where username like 'John%'
 ```
 
-##后匹配： 对于需要用like '%suffix' 的例子，可以创建一个辅助列存储反转字符串，基于这个列来匹配
+## 后匹配:对于需要用like '%suffix' 的例子，可以创建一个辅助列存储反转字符串，基于这个列来匹配
 ```sql
 alter table users add reversed_username  VARCHAR(255);
 update users set reversed_username = REVERSE(username);
