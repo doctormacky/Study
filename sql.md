@@ -1,6 +1,6 @@
-#1. 如何优化 mysql 中 模糊查询 逻辑
+#如何优化mysql中模糊查询 逻辑
 
-##前匹配： 使用用 like 'prefix%' 的形式，这种情况Mysql可以正常利用索引
+##前匹配:使用用 like 'prefix%' 的形式，这种情况Mysql可以正常利用索引
 ```sql
 select * from users where username like 'John%'
 ```
