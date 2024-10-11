@@ -47,3 +47,19 @@ select * from users where created_at >= '2024-10-10' and username like 'John%';
   ```
 
 ### 建立额外的字段，然后对该字段建新的索引
+
+## MySQL中做分页的时候，offset比较大的时候，可以考虑如下方案
+
+### 添加id限制
+```sql
+select * from table where id > last_seen_id order by id asc limit page_size;
+```
+注意，这个id必须是唯一的
+
+### 使用子查询，仅选择需要的记录id, 然后通过id提取完整记录
+```sql
+select t.* from table t
+join (
+select id from table order by id limit offset, page_size
+) sub on t.id = sub.id
+```
